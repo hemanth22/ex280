@@ -1,0 +1,122 @@
+  983  wget https://developers.redhat.com/content-gateway/file/pub/openshift-v4/clients/crc/2.57.0/crc-linux-amd64.tar.xz
+  984  tar xvf crc-linux-amd64.tar.xz 
+  985  crc delete
+  986  cd crc-linux-2.57.0-amd64/
+  987  history | grep setup
+  988  crc setup
+  989  crc start -d 80 -m 32768 -p ../pull-secret 
+  990  vim login.txt
+  991  ip a
+  992  exit
+  993  cat /etc/os-release 
+  994  crc status
+  995  free -m
+  996  lscpu | less
+  997  exity
+  998  exit
+  999  history
+ 1000  cat pull-secret 
+ 1001  history
+ 1002  cd  crc-linux-2.57.0-amd64/
+ 1003  cat login.txt 
+ 1004  eval $(crc oc-env)
+ 1005  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+ 1006  crc console --credentials
+ 1007  cd
+ 1008  oc projects
+ 1009  oc get ns
+ 1010  oc get ns | wc -l
+ 1011  oc projects
+ 1012  oc projects | wc -l
+ 1013  oc login -u developer -p developer
+ 1014  oc projects
+ 1015  oc get ns
+ 1016  oc completion --help | less
+ 1017  oc completion bash > ~/.kube/completion.bash.inc
+ 1018    printf "
+  # oc shell completion
+  source '$HOME/.kube/completion.bash.inc'
+  " >> $HOME/.bash_profile
+ 1019    source $HOME/.bash_profile
+ 1020  oc new-project -h | less
+ 1021* 
+ 1022  history
+ 1023  oc whoami
+ 1024  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+ 1025  htpasswd -c -B -b /tmp/htpasswd admin password
+ 1026  sudo dnf provides */htpasswd
+ 1027  sudo subscription-manager register
+ 1028  sudo dnf repolist
+ 1029  sudo dnf provides */htpasswd
+ 1030  sudo dnf install httpd-tools
+ 1031  htpasswd -c -B -b /tmp/htpasswd admin password
+ 1032  cat /tmp/htpasswd 
+ 1033  htpasswd -B -b /tmp/htpasswd anna password
+ 1034  htpasswd -B -b /tmp/htpasswd linda password
+ 1035  htpasswd -B -b /tmp/htpasswd anouk password
+ 1036  htpasswd -B -b /tmp/htpasswd lisa password
+ 1037  htpasswd -B -b /tmp/htpasswd ahmed password
+ 1038  cat /tmp/htpasswd 
+ 1039  oc create secret -h | less
+ 1040  oc create secret generic -h | less
+ 1041  oc create secret generic htpasswd-secret --from-file htpasswd=/tmp/htpasswd -n openshift-config
+ 1042  oc adm policy -h | less
+ 1043  oc adm policy add-cluster-role-to-user -h | less
+ 1044  oc adm policy add-cluster-role-to-user cluster-admin admin
+ 1045  oc get oauth
+ 1046  oc get oauth -o yaml > oauth.yaml
+ 1047  vim oauth.yaml 
+ 1048  oc get all -n openshift-authentication
+ 1049  oc replace -f oauth.yaml 
+ 1050  oc get all -n openshift-authentication
+ 1051  watch oc get all -n openshift-authentication
+ 1052  oc delete pod -n openshift-authentication
+ 1053  oc delete pod -n openshift-authentication oauth-openshift-5f6577b965-xhrqw 
+ 1054  watch oc get all -n openshift-authentication
+ 1055  oc get users
+ 1056  oc login -u anna -p password
+ 1057  oc get users
+ 1058  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+ 1059  oc get users
+ 1060  history
+ 1061  oc whoami
+ 1062  oc get nodes
+ 1063  oc get users
+ 1064  oc login -u anna -p password
+ 1065  oc get users
+ 1066  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+ 1067  oc get identity
+ 1068  oc adm groups -h | less
+ 1069  oc adm groups new developers
+ 1070  oc adm groups add-users developers anouk
+ 1071  oc adm groups new testers
+ 1072  oc adm groups add-users testers santos
+ 1073  oc adm groups add-users testers lisa
+ 1074  oc get clusterroles
+ 1075  oc get clusterroles | wc -l
+ 1076  oc get clusterroles | grep -v 'system:'
+ 1077  oc describe clusterrole storage-admin
+ 1078  oc create clusterrole -h | less
+ 1079  oc get cluserrolbinding -o wide | grep 'self-provisioner'
+ 1080  oc get clusterrolebinding -o wide | grep 'self-provisioner'
+ 1081  oc describe clusterrolebindings self-provisioners 
+ 1082  oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
+ 1083  oc describe clusterrolebindings self-provisioners 
+ 1084  oc login -u linda -p password
+ 1085  oc whoami
+ 1086  oc new-project rbac
+ 1087  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+ 1088  oc policy add-role-to-user admin linda -n rbac
+ 1089  oc new-project rbac
+ 1090  oc policy add-role-to-user admin linda -n rbac
+ 1091  oc get groups
+ 1092  oc login -u admin -p password
+ 1093  oc policy add-role-to-group edit developers -n rbac
+ 1094  oc policy add-role-to-group view testers -n rbac
+ 1095  oc get rolebindings -o wide
+ 1096  oc adm policy add-cluster-role-to-group --rolebinding-name self-provisioners self-provisioner system:authenticated:oauth
+ 1097  oc whoami
+ 1098  oc login -u linda -p password
+ 1099  oc new-project whatever
+ 1100  history
+ 1101  history > /tmp/08dec25.txt
