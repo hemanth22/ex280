@@ -1,0 +1,510 @@
+  489  cat pull-secret 
+  490  history
+  491  cd  crc-linux-2.57.0-amd64/
+  492  cat login.txt 
+  493  eval $(crc oc-env)
+  494  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+  495  crc console --credentials
+  496  cd
+  497  oc projects
+  498  oc get ns
+  499  oc get ns | wc -l
+  500  oc projects
+  501  oc projects | wc -l
+  502  oc login -u developer -p developer
+  503  oc projects
+  504  oc get ns
+  505  oc completion --help | less
+  506  oc completion bash > ~/.kube/completion.bash.inc
+  507    printf "
+  508    # oc shell completion
+  509    source '$HOME/.kube/completion.bash.inc'
+  510    " >> $HOME/.bash_profile
+  511    source $HOME/.bash_profile
+  512  oc new-project -h | less
+  513  history
+  514  oc whoami
+  515  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+  516  htpasswd -c -B -b /tmp/htpasswd admin password
+  517  sudo dnf provides */htpasswd
+  518  sudo subscription-manager register
+  519  sudo dnf repolist
+  520  sudo dnf provides */htpasswd
+  521  sudo dnf install httpd-tools
+  522  htpasswd -c -B -b /tmp/htpasswd admin password
+  523  cat /tmp/htpasswd 
+  524  htpasswd -B -b /tmp/htpasswd anna password
+  525  htpasswd -B -b /tmp/htpasswd linda password
+  526  htpasswd -B -b /tmp/htpasswd anouk password
+  527  htpasswd -B -b /tmp/htpasswd lisa password
+  528  htpasswd -B -b /tmp/htpasswd ahmed password
+  529  cat /tmp/htpasswd 
+  530  oc create secret -h | less
+  531  oc create secret generic -h | less
+  532  oc create secret generic htpasswd-secret --from-file htpasswd=/tmp/htpasswd -n openshift-config
+  533  oc adm policy -h | less
+  534  oc adm policy add-cluster-role-to-user -h | less
+  535  oc adm policy add-cluster-role-to-user cluster-admin admin
+  536  oc get oauth
+  537  oc get oauth -o yaml > oauth.yaml
+  538  vim oauth.yaml 
+  539  oc get all -n openshift-authentication
+  540  oc replace -f oauth.yaml 
+  541  oc get all -n openshift-authentication
+  542  watch oc get all -n openshift-authentication
+  543  oc delete pod -n openshift-authentication
+  544  oc delete pod -n openshift-authentication oauth-openshift-5f6577b965-xhrqw 
+  545  watch oc get all -n openshift-authentication
+  546  oc get users
+  547  oc login -u anna -p password
+  548  oc get users
+  549  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+  550  oc get users
+  551  history
+  552  oc whoami
+  553  oc get nodes
+  554  oc get users
+  555  oc login -u anna -p password
+  556  oc get users
+  557  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+  558  oc get identity
+  559  oc adm groups -h | less
+  560  oc adm groups new developers
+  561  oc adm groups add-users developers anouk
+  562  oc adm groups new testers
+  563  oc adm groups add-users testers santos
+  564  oc adm groups add-users testers lisa
+  565  oc get clusterroles
+  566  oc get clusterroles | wc -l
+  567  oc get clusterroles | grep -v 'system:'
+  568  oc describe clusterrole storage-admin
+  569  oc create clusterrole -h | less
+  570  oc get cluserrolbinding -o wide | grep 'self-provisioner'
+  571  oc get clusterrolebinding -o wide | grep 'self-provisioner'
+  572  oc describe clusterrolebindings self-provisioners 
+  573  oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
+  574  oc describe clusterrolebindings self-provisioners 
+  575  oc login -u linda -p password
+  576  oc whoami
+  577  oc new-project rbac
+  578  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+  579  oc policy add-role-to-user admin linda -n rbac
+  580  oc new-project rbac
+  581  oc policy add-role-to-user admin linda -n rbac
+  582  oc get groups
+  583  oc login -u admin -p password
+  584  oc policy add-role-to-group view testers -n rbac
+  585  oc get rolebindings -o wide
+  586  oc adm policy add-cluster-role-to-group --rolebinding-name self-provisioners self-provisioner system:authenticated:oauth
+  587  oc whoami
+  588  oc login -u linda -p password
+  589  oc new-project whatever
+  590  history
+  591  history > /tmp/08dec25.txt
+  592  vim /tmp/08dec25.txt 
+  593  oc get sc
+  594  oc create deploy nginx --image=bitnami/nginx 
+  595  oc get all
+  596  oc set volumes -h | less
+  597  oc set volumes deploy/nginx --add --name my-pv-storage --type persistentVolumeClaim --claim-mode rwo --claim-size 1Gi --mount-path /data --claim-name mypvc
+  598  oc get pvc
+  599  oc get pv
+  600  oc get deploy -o yaml | less
+  601  oc exec -it nginx-6cf64bb697-nqkv8 -- touch /data/lindafile
+  602  crc ssh
+  603  oc describe pv -o yaml | less
+  604  oc get pv -o yaml | less
+  605  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+  606  oc get pv -o yaml | less
+  607  oc get sc -o yaml
+  608  history
+  609  oc create secret generic -h | less
+  610  oc create secret generic mysql --from-literal user=sqluser --from-literal password=password --from-literal database=secretdb --from-literal hostname=mysql --from-literal root_password=password
+  611  oc get secret -o yaml | less
+  612  oc get secret mysql -o yaml | less
+  613  echo c2VjcmV0ZGI= | base64 -d
+  614  oc new-project newer
+  615  oc whoami
+  616  oc new-app -h | less
+  617  oc new-app --name mysql --docker-image bitnami/mysql
+  618  oc get all
+  619  podman search bitnami/mysql
+  620  oc new-app --name mysql --docker-image docker.io/library/bitnami/mysql
+  621  podman search mysql | grep bitnami
+  622  oc new-app --name mysql --docker-image docker.io/bitnami/mysql
+  623  oc get all
+  624  oc new-app --name mysql --image docker.io/bitnami/mysql
+  625  oc new-app --name mysql --image bitnami/mysql
+  626  oc get all
+  627  podman search mysql | less
+  628  oc new-app --name mysql --image registry.redhat.io/rhel10/mysql-84
+  629  oc get all
+  630  oc describe pod mysql-6dc5997c65-vgncv 
+  631  oc logs mysql-6dc5997c65-vgncv 
+  632  oc set env deploy/mysql --from secret/mysql --prefix MYSQL_
+  633  oc get secrets
+  634  oc create secret generic mysql --from-literal user=sqluser --from-literal password=password --from-literal database=secretdb --from-literal hostname=mysql --from-literal root_password=password
+  635  oc set env deploy/mysql --from secret/mysql --prefix MYSQL_
+  636  oc get all
+  637  oc get deployment mysql -o yaml | less
+  638  oc exec -it mysql-d64c9d559-qfqf7 -- env
+  639  kubectl get sa
+  640  kubectl get deploy
+  641  oc get deployment mysql -o yaml | grep ervice
+  642  oc get deployment mysql -o yaml | less
+  643  oc explain --recursive deploy | grep -C 5 ervice
+  644  oc get pods.spec.serviceAccount
+  645  oc get pod.spec.serviceAccount
+  646  oc get pod.spec.containers.serviceAccount
+  647  oc get pod mysql-d64c9d559-qfqf7 -o yaml | less
+  648  oc get deploy  -o yaml | less
+  649  oc get pods  -o yaml | less
+  650  oc explain pods.spec | less
+  651  oc explain deployment.spec.template.spec | less
+  652  oc get scc
+  653  oc describe scc nonroot
+  654  oc describe scc nonroot | less
+  655  oc describe pod mysql-d64c9d559-qfqf7 | grep -i scc
+  656  oc whomai
+  657  oc whoami
+  658  oc login -u linda -p password
+  659  oc whoami
+  660  oc new-project sccs
+  661  oc new-app --name sccnginx --image=nginx:latest
+  662  oc get pods
+  663  oc logs sccnginx-854f688447-j6dsl 
+  664  oc get pods sccnginx-854f688447-j6dsl -o yaml | oc adm policy scc-subject-review -f -
+  665  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+  666  oc get pods sccnginx-854f688447-j6dsl -o yaml | oc adm policy scc-subject-review -f -
+  667  oc create sa nginx-sa
+  668  oc adm policy add-scc-to-user restricted-v2 -z nginx-sa
+  669  oc adm policy add-scc-to-user restricted-v2 -h | less
+  670  oc login -u linda -p password
+  671  oc get all
+  672  oc get sa
+  673  oc set serviceaccount deployment sccnginx nginx-sa
+  674  oc get pods
+  675  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+  676  oc get pods sccnginx-854f688447-j6dsl -o yaml | oc adm policy scc-subject-review -f -
+  677  oc status --suggest
+  678  subject-review -f -
+  679  oc whoami
+  680  oc adm policy add-scc-to-user anyuid -z nginx-sa
+  681  oc login -u linda -p password
+  682  oc get pods
+  683  oc delete pod sccnginx-58b569899f-m5wvs 
+  684  oc get pods
+  685  history
+  686  oc get all
+  687  curl 10.217.4.225
+  688  oc edit svc sccnginx 
+  689  oc get svc
+  690  crc ip
+  691  curl 127.0.0.1:31795
+  692  oc api-resources | less
+  693  oc expose -h | less
+  694  oc get svc
+  695  oc expose svc sccnginx --hostname whatever.com
+  696  oc get routes
+  697  curl whatever.com
+  698  oc delete route sccnginx 
+  699  oc expose svc sccnginx
+  700  oc get routes
+  701  curl sccnginx-sccs.apps-crc.testing
+  702  oc edit svc sccnginx 
+  703  curl sccnginx-sccs.apps-crc.testing
+  704  oc describe routes.route.openshift.io sccnginx 
+  705  oc describe svc sccnginx 
+  706  oc edit routes.route.openshift.io sccnginx 
+  707  oc edit svc sccnginx 
+  708  oc describe routes.route.openshift.io sccnginx 
+  709  oc describe svc sccnginx 
+  710  oc label -h | less
+  711  oc get nodes
+  712  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+  713  oc label nodes crc state=drunk
+  714  history | grep nginx
+  715  oc run testpod --image=docker.io/library/nginx --dry-run=client -o yaml > dryginx.yaml
+  716  vim dryginx.yaml 
+  717  oc apply -f dryginx.yaml 
+  718  oc get pods
+  719  oc describe pod testpod 
+  720  vim dryginx.yaml 
+  721  oc replace -f dryginx.yaml 
+  722  oc delete -f dryginx.yaml 
+  723  oc apply -f dryginx.yaml 
+  724  oc get pods
+  725  oc label node crc state-
+  726  oc get pods
+  727  oc create deploymentconfig -h | less
+  728  oc create deploymentconfig my-nginx --image=docker.io/library/nginx
+  729  kubectl get deploy
+  730  kubectl get dc
+  731  kubectl create deploy scales --image=docker.io/library/nginx --replicas=3 --dry-run=client -o yaml scale.yaml
+  732  kubectl create deploy scales --image=docker.io/library/nginx --replicas=3 --dry-run=client -o yaml > scale.yaml
+  733  kubectl delete deploy scale.yaml 
+  734  oc get deploy
+  735  vim scale.yaml 
+  736  oc apply -f scale.yaml 
+  737  vim scale.yaml 
+  738  oc run testing --image=docker.io/library/nginx --dry-run=client -o yaml > testing.yaml
+  739  vim testing.yaml 
+  740  oc get deploy
+  741  oc apply -f scale.yaml 
+  742  oc get deploy
+  743  oc apply -f testing.yaml 
+  744  oc get deploy
+  745  oc get pods
+  746  oc logs scales-77759f8bf7-9szm8 
+  747  oc delete all --all
+  748  crc config set enable-cluster-monitoring true
+  749  crc config view
+  750  oc get ns | grep metri
+  751  oc get ns | grep prome
+  752  oc get pods -A
+  753  oc get pods -A | grep metr
+  754  oc get pods -A | grep prome
+  755  history | grep kubead
+  756  sudo poweroff
+  757  crc status
+  758  crc start -d 80 -m 32768 -p ../pull-secret 
+  759  eval $(crc oc-env)
+  760  oc login -u kubeadmin -p auaQn-UazkW-d3DaE-WLDfC
+  761  oc new-project yeah
+  762  mkdir openssl
+  763  cd openssl/
+  764  openssl genrsa -des3 -out myCA.key 2048
+  765  openssl req -x509 -new -nodes -key myCA.key -sha256 -days 3650 -out myCA.pem
+  766  openssl x509 -req -in tls.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out tls.crt -days 1650 -sha256
+  767  history
+  768  openssl genrsa -out tls.key 2048
+  769  openssl req -new -key tls.key -out tls.csr
+  770  openssl x509 -req -in tls.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out tls.crt -days 1650 -sha256
+  771  ls -lrt
+  772  oc new-project myproject
+  773  oc project mproject
+  774  oc project myproject
+  775  cd ../ex288/
+  776  cd ..
+  777  ls
+  778  git clone https://github.com/sandervanvugt/ex280
+  779  cd ex280/
+  780  vim linginx1.conf 
+  781  oc create cm linginx1 --from-file linginx1.conf 
+  782  oc whoami
+  783  oc create sa linginx-sa
+  784  oc adm policy add-scc-to-user anyuid -z linginx-sa
+  785  vim linginx-v1.yaml 
+  786  oc create -f linginx-v1.yaml 
+  787  oc get pods,svc
+  788  oc create route -h | less
+  789  oc create route edge -h | less
+  790  oc create route edge linginx1 --service linginx1 --cert=../openssl/tls.crt --key=../openssl/tls.key --ca-cert=../openssl/myCA.pem
+  791  oc get all
+  792  curl -k https://linginx1-myproject.apps-crc.testing
+  793  history
+  794  curl  http://linginx1-myproject.apps-crc.testing
+  795  history
+  796  curl  http://linginx1-myproject.apps-crc.testing
+  797  oc describe route linginx1 
+  798  mkdir openssl
+  799  cd openssl/
+  800  openssl genrsa -des3 -out myCA.key 2048
+  801  openssl req -x509 -new -nodes -key myCA.key -sha256 -days 3650 -out myCA.pem
+  802  openssl genrsa -out tls.key 2048
+  803  openssl req -new -key tls.key -out tls.csr
+  804  ls -l
+  805  openssl x509 -req -in tls.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out tls.crt -days 1650 -sha256
+  806  oc create secret tls linginx-certs --cert tls.crt --key tls.key
+  807  cd ..
+  808  cat default.conf 
+  809  oc create cm nginxconfigmap --from-file default.conf
+  810  oc create sa linginx-sa
+  811  oc new-project default
+  812  oc project default
+  813  history
+  814  oc create secret tls linginx-certs --cert tls.crt --key tls.key
+  815  cd openssl/
+  816  oc create secret tls linginx-certs --cert tls.crt --key tls.key
+  817  cd ..
+  818  oc create cm nginxconfigmap --from-file default.conf
+  819  oc create sa linginx-sa
+  820  oc adm policy add-scc-to-user anyuid -z linginx-sa
+  821  vim linginx-v2.yaml 
+  822  oc create -f linginx-v2.yaml 
+  823  oc create route passthrough linginx --service linginx2 --port 8443 --hostname=linginx-default.apps-crc.testing
+  824  oc get routes
+  825  oc get svc
+  826  curl -k linginx-default.apps-crc.testing
+  827  history
+  828  oc projects
+  829  history
+  830  vim nwpolicy-complete-example.yaml 
+  831  oc apply -f nwpolicy-complete-example.yaml 
+  832  oc expose pod nginx --port=80
+  833  oc exec -it busybox -- wget --spider --timeout=1 nginx
+  834  oc describe networkpolicy
+  835  oc label pod busybox access=true
+  836  oc exec -it busybox -- wget --spider --timeout=1 nginx
+  837  oc create ns nwp-namespace
+  838  ls
+  839  cd ..
+  840  git clone https://github.com/sandervanvugt/cka
+  841  cd cka
+  842  ls
+  843  vim nwp-lab10-1.yaml 
+  844  oc apply -f nwp-lab10-1.yaml 
+  845  oc expose pod nwp-nginx --port=80
+  846  oc exec -it nwp-busybox -n nwp-namespace -- wget --spider --timeout=1 nwp-nginx
+  847  oc exec -it nwp-busybox -n nwp-namespace -- nslookup nwp-nginx 
+  848  oc exec -it nwp-busybox -n nwp-namespace -- wget --spider --timeout=1 nwp-nginx.default.svc.cluster.local
+  849  vim nwp-lab10-2.yaml 
+  850  oc apply -f nwp-lab10-2.yaml 
+  851  oc exec -it nwp-busybox -n nwp-namespace -- wget --spider --timeout=1 nwp-nginx.default.svc.cluster.local
+  852  history
+  853  vim nwp-lab10-1.yaml 
+  854  vim dmitriy.yaml
+  855  oc get pods --show-labels
+  856  vim dmitriy.yaml
+  857  vim nwp-lab10-1.yaml
+  858  vim dmitriy.yaml
+  859  vim nwp-lab10-1.yaml
+  860  oc get ns nwp-namespace --show-labels
+  861  vim dmitriy.yaml
+  862  oc apply -f dmitriy.yaml 
+  863  oc exec -it nwp-busybox -n nwp-namespace -- wget --spider --timeout=1 nwp-nginx.default.svc.cluster.local
+  864  cat dmitriy.yaml 
+  865  ./counter.sh 13
+  866  cat dmitriy.yaml 
+  867  oc get deploy
+  868  oc scale deploy linginx2 --replicas=3
+  869  oc scale deploy linginx2 --replicas=0
+  870  history | grep autosc
+  871  oc get pods -A | grep metrics
+  872  oc new-app --name simple php~https://github.com/sandervanvugt/simpleapp
+  873  oc get all
+  874  oc autoscale deployment simple --min 5 --max 10 --cpu-percent 1
+  875  oc get hpa
+  876  oc get deploy
+  877  oc describe hpa simple 
+  878  oc set resources -h | less
+  879  #  oc set resources deployment nginx --limits=cpu=200m,memory=512Mi --requests=cpu=100m,memory=256Mi
+  880  oc set resources deploy simple --limits=256Mi --requests=16Mi
+  881  oc set resources deploy simple --limits=memory=256Mi --requests=memory=16Mi
+  882  oc get deploy simple -o yaml | less
+  883  cd
+  884  oc new-project jawohl
+  885  oc get all
+  886  oc create deploy nee --image=bitnami/nginx:latest --replicas=3
+  887  oc get pods
+  888  oc set resource deploy nee --request cpu=1m,memory=1Mi --limits cpu=20m,memory=5Mi
+  889  oc set resource deploy nee --requests cpu=1m,memory=1Mi --limits cpu=20m,memory=5Mi
+  890  oc set resources deploy nee --requests cpu=1m,memory=1Mi --limits cpu=20m,memory=5Mi
+  891  oc get all
+  892  oc set resources deploy nee --requests cpu=1m,memory=10Gi --limits cpu=20m,memory=50Gi
+  893  kubectl get all
+  894  oc describe  node crc | less
+  895  oc get all
+  896  oc describe pod nee-7c77d6f7bc-7f5kj 
+  897  oc set resources deploy nee --requests cpu=1m,memory=10Mi --limits cpu=20m,memory=50Mi
+  898  oc adm top pods
+  899  oc create quota -h | less
+  900  oc whoami
+  901  oc new-project quota-test
+  902  oc create quota qtest --hard pods=3,cpu=100m,memory=500Mi
+  903  oc describe quota
+  904  oc create deploy bitginx --image=bitnami/nginx:latest --replicas=3
+  905  oc get all
+  906  oc describe rs bitginx-d4f859d5d 
+  907  oc set resources deploy bitginx --requests cpu=100m,memory=5Mi --limits cpu=200m,memory=20Mi
+  908  oc get all
+  909  oc describe quota
+  910  oc create quota qtest --hard pods=3,cpu=1,memory=500Mi
+  911  oc edit quota qtest
+  912  oc describe quota
+  913  oc get all
+  914  oc get LimitRange
+  915  oc api-resources | grep -i limitr
+  916  oc new-project limits
+  917  oc explain limitrange.spec.limits
+  918  cd ex280/
+  919  vim limits.yaml 
+  920  oc create -f limits.yaml
+  921  oc get limitrange
+  922  oc describe limitranges limit-limits 
+  923  oc describe ns
+  924  oc describe ns limits
+  925  oc create deploy limitginx --image=bitnami/nginx:latest --replicas=8
+  926  oc get all
+  927  oc describe replicaset limitginx-7dc4d7c698 
+  928  vim limits.yaml 
+  929  oc apply -f limits.yaml 
+  930  oc get all
+  931  oc get deploy
+  932  oc scale deploy limitginx --replicas=4
+  933  oc get deploy
+  934  oc describe rs limitginx-7dc4d7c698 
+  935  oc_project_ps1() {   local proj;   proj=$(oc project -q 2>/dev/null);   [ -n "$proj" ] && echo "[${proj}] "; }
+  936  PS1='$(oc_project_ps1)'"$PS1"
+  937  sudo vim /etc/profile.d/ocprompt.sh
+  938  oc adm taint node crc priority=highest:NoSchedule
+  939  oc new-project tainted
+  940  oc create deploy taintginx --image=bitnami/nginx:latest --replicas=3
+  941  oc get all
+  942  oc describe pod taintginx-845d4489b5-78jq2 
+  943  oc edit deploy taintginx 
+  944  oc get all
+  945  oc edit node crc 
+  946  oc adm taint node crc priority-
+  947  cd
+  948  oc adm must-gather
+  949  ls
+  950  tar -czvf cluster-247d2f50-fa05-4772-85b5-c3b67ba83b39.tar.gz must-gather.local.4831067140441011288/
+  951  ls -l 
+  952  ls -l clu*
+  953  oc create cronjob -h | less
+  954  #  oc create cronjob my-job --image=busybox --schedule="*/1 * * * *" -- date
+  955  oc create cronjob ooit --image=busybox --schedule="*/1 * * * *" --dry-run=client -o yaml -- date > ooit.yaml
+  956  oc explain cronjob.spec
+  957  vim ooit.yaml 
+  958  oc apply -f ooit.yaml 
+  959  date
+  960  oc get all
+  961  oc logs ooit-29421724-mscc9 
+  962  history
+  963  oc adm create-bootstrap-project-template -o yaml > stemplate.yaml
+  964  vim stemplate.yaml 
+  965  history | grep -i limitr
+  966  oc get limitranges -A
+  967  oc get limitranges -n limits -o yaml >> stemplate.yaml 
+  968  vim stemplate.yaml 
+  969  oc create -f stemplate.yaml -n openshift-config
+  970  oc edit projects.config.openshift.io/cluster
+  971  sleep 60
+  972  oc new-project santos
+  973  oc describe project santos
+  974  oc get all
+  975  oc create deploy santosginx --image=bitnami/nginx:latest --replicas=3
+  976  oc get all
+  977  oc get limitrange
+  978  oc delete limitrange santos-limitrange 
+  979  oc get all
+  980  oc describe ns santos
+  981  oc get all
+  982  oc scale deployment santos --replicas=4
+  983  oc get deploy
+  984  oc edit project.config.openshift.io/cluster
+  985  oc set probe -h | less
+  986  #oc set probe rc/mysql --readiness --open-tcp=3306
+  987  oc get all
+  988  oc get deploy
+  989  oc get deploy,rs,pods
+  990  oc set probe deploy/santosginx --readiness --open-tcp=3306
+  991  oc edit deploy santosginx 
+  992  sleep 11
+  993  oc get deploy,rs,pods
+  994  oc describe pod santosginx-5cb86fcb7-srz9q 
+  995  oc edit deployments.apps santosginx 
+  996  history
+  997  sudo poweroff
+  998  history > /tmp/dec2025.txt
